@@ -6,7 +6,7 @@ import com.github.nscala_time.time.Imports.*
 import sttp.client4.{Response, UriContext}
 import sttp.model.{Method, RequestMetadata, StatusCode}
 
-class GoogleAccessTokenTest extends AnyFunSpec with should.Matchers {
+class GoogleAccessTokenTest extends AnyFunSpec with should.Matchers:
   describe("getting token from response"):
     val responseBody: String =
       """{
@@ -37,4 +37,3 @@ class GoogleAccessTokenTest extends AnyFunSpec with should.Matchers {
       val responseNoExpiresIn: Response[String] = Response("""{"access_token": "incomplete"}""", StatusCode.Ok, requestMetadata)
       
       an[IllegalArgumentException] should be thrownBy GoogleAccessToken.getTokenFromResponse(responseNoExpiresIn, currentTimeSecond)
-}

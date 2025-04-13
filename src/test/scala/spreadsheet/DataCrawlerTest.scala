@@ -5,7 +5,7 @@ import org.scalatest.matchers.should
 import sttp.client4.{Response, UriContext}
 import sttp.model.{Method, RequestMetadata, StatusCode}
 
-class DataCrawlerTest extends AnyFunSpec with should.Matchers {
+class DataCrawlerTest extends AnyFunSpec with should.Matchers:
   describe("getDataFromResponse"):
     val requestMetadata = RequestMetadata(Method(""), uri"http://localhost", Seq()): RequestMetadata
     it("should return the first values in array of string"):
@@ -67,4 +67,3 @@ class DataCrawlerTest extends AnyFunSpec with should.Matchers {
 
       DataCrawler.getTableRange(startsAt, headers, 1) shouldEqual expectedRange
       DataCrawler.getTableRange(startsAt, headers, 5) shouldEqual expectedRangeWithWindow
-}

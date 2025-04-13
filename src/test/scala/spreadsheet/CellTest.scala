@@ -3,7 +3,7 @@ package spreadsheet
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should
 
-class CellTest extends AnyFunSpec with should.Matchers {
+class CellTest extends AnyFunSpec with should.Matchers:
   describe("fromCellString"):
     it("should parse Excel cell string (e.g. A1, Z34, AB27)"):
       Cell.fromCellString("A1") shouldEqual Cell(1, 1)
@@ -36,4 +36,3 @@ class CellTest extends AnyFunSpec with should.Matchers {
       Cell.getColumnString(57) shouldEqual "BE"
       Cell.getColumnString(183) shouldEqual "GA"
       Cell.getColumnString(703) shouldEqual "AAA"
-}
