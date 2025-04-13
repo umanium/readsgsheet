@@ -41,7 +41,7 @@ object GoogleAccessToken:
     response.code match
       case StatusCode.Ok =>
         val parsedResponseBody = read[Map[String, String]](response.body)
-        if(parsedResponseBody.keySet.contains("access_token") && parsedResponseBody.keySet.contains("expires_in"))
+        if parsedResponseBody.keySet.contains("access_token") && parsedResponseBody.keySet.contains("expires_in") then
           (parsedResponseBody("access_token"), currentTimeInSecond + parsedResponseBody("expires_in").toLong)
         else
           throw IllegalArgumentException("The response body must have access_token and expires_in")

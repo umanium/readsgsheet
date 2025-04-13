@@ -23,13 +23,13 @@ case class DataCrawler(spreadsheet: Spreadsheet, serviceAccount: GoogleServiceAc
       .send()
 
     val addedData: Seq[Seq[String]] = DataCrawler.getDataFromResponse(response)
-    if(addedData.nonEmpty && continuous)
-      if(addedData.length < readWindow)
+    if addedData.nonEmpty && continuous then
+      if addedData.length < readWindow then
         initialData ++ addedData
       else
         getData(Cell(startsAt.column, startsAt.row + readWindow), header, readWindow,
           continuous, initialData ++ addedData, Some(googleAccessToken))
-    else if(addedData.nonEmpty)
+    else if addedData.nonEmpty then
       initialData ++ addedData
     else
       initialData
@@ -49,8 +49,8 @@ case class DataCrawler(spreadsheet: Spreadsheet, serviceAccount: GoogleServiceAc
       .send()
 
     val addedData: Seq[Seq[String]] = DataCrawler.getDataFromResponse(response)
-    if(addedData.nonEmpty)
-      if(addedData.head.length < readWindow)
+    if addedData.nonEmpty then
+      if addedData.head.length < readWindow then
         initialData ++ addedData.head
       else
         val nextStart: Cell = Cell(startsAt.column + readWindow, startsAt.row)
@@ -69,7 +69,7 @@ object DataCrawler:
     response.code match
       case StatusCode.Ok =>
         val parsedResponseBody = ujson.read(response.body)
-        if(parsedResponseBody.obj.keys.toList.contains("values"))
+        if parsedResponseBody.obj.keys.toList.contains("values") then
           val valueArray = parsedResponseBody("values").arr
           valueArray.toList.map(a => a.arr.toList.map(v => v.str))
         else

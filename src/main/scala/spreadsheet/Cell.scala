@@ -26,15 +26,15 @@ object Cell:
   @tailrec
   def getColumnString(colInt: Int, initString: String = ""): String =
     val nextPow: Int = scala.math.pow(26, initString.length + 1).toInt
-    val toCalculate: Int = if(colInt % nextPow == 0) 26 else colInt % nextPow
+    val toCalculate: Int = if colInt % nextPow == 0 then 26 else colInt % nextPow
 
     val basePow: Int = scala.math.pow(26, initString.length).toInt
     val currentInt: Int = toCalculate / basePow
     val currentChar: Char = (currentInt + 64).toChar
-    val nextString: String = currentChar + initString
+    val nextString: String = currentChar +: initString
 
     val nextCalculation: Int = colInt - (basePow * currentInt)
-    if(nextCalculation > 0)
+    if nextCalculation > 0 then
       getColumnString(nextCalculation, nextString)
     else
       nextString
