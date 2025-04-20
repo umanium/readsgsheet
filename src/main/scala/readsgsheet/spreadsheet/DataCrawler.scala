@@ -9,8 +9,9 @@ import scala.annotation.tailrec
 
 case class DataCrawler(spreadsheet: Spreadsheet, serviceAccount: GoogleServiceAccount):
   @tailrec
-  final def getData(startsAt: Cell, header: Seq[String], readWindow: Int, continuous: Boolean = false,
-              initialData: Seq[Seq[String]] = Seq(), accessToken: Option[GoogleAccessToken] = None): Seq[Seq[String]] =
+  final def getData(startsAt: Cell, header: Seq[String], readWindow: Int, includeRowNumber: Boolean = false,
+                    continuous: Boolean = false, initialData: Seq[Seq[String]] = Seq(),
+                    accessToken: Option[GoogleAccessToken] = None): Seq[Seq[String]] =
     val googleAccessToken: GoogleAccessToken = accessToken match
       case Some(token: GoogleAccessToken) => token
       case None => GoogleAccessToken.generateFromServiceAccount(serviceAccount, "https://www.googleapis.com/auth/spreadsheets")
@@ -22,12 +23,18 @@ case class DataCrawler(spreadsheet: Spreadsheet, serviceAccount: GoogleServiceAc
       .auth.bearer(googleAccessToken.accessToken)
       .send()
 
-    val addedData: Seq[Seq[String]] = DataCrawler.getDataFromResponse(response)
+    val addedData: Seq[Seq[String]] =
+      val initialData: Seq[Seq[String]] = DataCrawler.getDataFromResponse(response)
+      if includeRowNumber then
+        (startsAt.row until startsAt.row + initialData.length).map(_.toString).toList.zip(initialData).map((a, b) => a +: b)
+      else
+        initialData
+
     if addedData.nonEmpty && continuous then
       if addedData.length < readWindow then
         initialData ++ addedData
       else
-        getData(Cell(startsAt.column, startsAt.row + readWindow), header, readWindow,
+        getData(Cell(startsAt.column, startsAt.row + readWindow), header, readWindow, includeRowNumber,
           continuous, initialData ++ addedData, Some(googleAccessToken))
     else if addedData.nonEmpty then
       initialData ++ addedData
