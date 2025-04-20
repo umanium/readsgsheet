@@ -1,8 +1,9 @@
-package auth
+package readsgsheet.auth
 
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should
 import com.github.nscala_time.time.Imports.*
+import readsgsheet.auth.GoogleAccessToken
 import sttp.client4.{Response, UriContext}
 import sttp.model.{Method, RequestMetadata, StatusCode}
 

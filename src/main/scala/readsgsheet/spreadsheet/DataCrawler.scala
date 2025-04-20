@@ -1,6 +1,6 @@
-package spreadsheet
+package readsgsheet.spreadsheet
 
-import auth.{GoogleAccessToken, GoogleServiceAccount}
+import readsgsheet.auth.{GoogleAccessToken, GoogleServiceAccount}
 import sttp.client4.Response
 import sttp.client4.quick.*
 import sttp.model.StatusCode

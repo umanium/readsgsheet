@@ -1,7 +1,8 @@
-package auth
+package readsgsheet.auth
 
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should
+import readsgsheet.auth.GoogleServiceAccount
 import upickle.core.AbortException
 
 import java.io.FileNotFoundException

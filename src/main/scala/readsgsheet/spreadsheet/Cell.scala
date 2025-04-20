@@ -1,4 +1,4 @@
-package spreadsheet
+package readsgsheet.spreadsheet
 
 import scala.annotation.tailrec
 import scala.util.matching.Regex

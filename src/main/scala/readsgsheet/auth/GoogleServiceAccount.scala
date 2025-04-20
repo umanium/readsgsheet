@@ -1,4 +1,4 @@
-package auth
+package readsgsheet.auth
 
 import upickle.default.*
 

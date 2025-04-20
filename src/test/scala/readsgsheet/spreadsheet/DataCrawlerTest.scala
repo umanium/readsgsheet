@@ -1,7 +1,8 @@
-package spreadsheet
+package readsgsheet.spreadsheet
 
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should
+import readsgsheet.spreadsheet.{Cell, DataCrawler}
 import sttp.client4.{Response, UriContext}
 import sttp.model.{Method, RequestMetadata, StatusCode}
 

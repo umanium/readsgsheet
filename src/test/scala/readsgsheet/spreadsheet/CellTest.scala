@@ -1,7 +1,8 @@
-package spreadsheet
+package readsgsheet.spreadsheet
 
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should
+import readsgsheet.spreadsheet.Cell
 
 class CellTest extends AnyFunSpec with should.Matchers:
   describe("fromCellString"):
